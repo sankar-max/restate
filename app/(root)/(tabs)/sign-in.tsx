@@ -1,10 +1,19 @@
 import icons from "@/constants/icons"
 import images from "@/constants/images"
+import { login } from "@/lib/appwrite"
+import { useGlobalContext } from "@/providers/global"
 import React from "react"
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
-function SignIN() {
+function SignIn() {
+  const { isLogged, refetch } = useGlobalContext()
+  const handleLogin = async () => {
+    const res = await login()
+    if (res) {
+      refetch()
+    }
+  }
   return (
     <SafeAreaView className="bg-white h-full">
       <ScrollView contentContainerClassName="h-full">
@@ -26,7 +35,10 @@ function SignIN() {
             Login to estate with google
           </Text>
 
-          <TouchableOpacity className="bg-white gap-3 shadow-md flex flex-row items-center justify-center  shadow-zinc-300 rounded-full py-4 mt-5 ">
+          <TouchableOpacity
+            onPress={handleLogin}
+            className="bg-white gap-3 shadow-md flex flex-row items-center justify-center  shadow-zinc-300 rounded-full py-4 mt-5 "
+          >
             <Image
               source={icons.google}
               className="size-5"
@@ -40,4 +52,4 @@ function SignIN() {
   )
 }
 
-export default SignIN
+export default SignIn
