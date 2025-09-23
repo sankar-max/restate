@@ -1,12 +1,29 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import { useState } from "react"
+import { Image, StyleSheet, Text } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 
-const Profile = () => {
+function LogoTitle() {
   return (
-    <View>
-      <Text>Profile</Text>
-    </View>
+    <Image
+      style={styles.image}
+      source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
+    />
   )
 }
 
-export default Profile
+export default function Home() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <SafeAreaView>
+      <Text>Count: {count}</Text>
+    </SafeAreaView>
+  )
+}
+
+const styles = StyleSheet.create({
+  image: {
+    width: 50,
+    height: 50,
+  },
+})
